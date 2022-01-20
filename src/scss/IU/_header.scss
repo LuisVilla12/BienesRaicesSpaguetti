@@ -1,6 +1,26 @@
 @use '../base/variables' as v;
 @use '../base/mixins' as m;
-.header {}
+.header {
+    padding: 4rem 0;
+}
+
+.barra {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gray;
+    @include m.tablet {
+        flex-direction: row;
+    }
+}
+
+.logo {
+    width: 30rem;
+    @include m.tablet {
+        max-width: 45rem;
+    }
+}
 
 .nav {
     display: flex;
@@ -9,5 +29,13 @@
     @include m.tablet {
         flex-direction: row;
         justify-content: space-between;
+    }
+    &__enlace {
+        margin: 1rem 0;
+        @include m.tablet {
+            margin: unset;
+            margin-right: 1rem;
+        }
+        font-size: 1.9rem;
     }
 }
