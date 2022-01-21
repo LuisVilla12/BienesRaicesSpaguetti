@@ -1,0 +1,62 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+.categorias {
+    margin: 2rem 0;
+    &__titulo {
+        text-align: center;
+        color: darken($color: v.$primario, $amount: 50);
+        margin: 2rem 0;
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+    &__grid {
+        @include m.tablet {
+            @include m.grid(3, 2rem);
+        }
+    }
+}
+
+.categoria {
+    text-align: center;
+    padding: 1rem;
+    @include m.tablet {
+        padding: 2rem;
+    }
+    &__maks {
+        overflow: hidden;
+    }
+    &__img {
+        margin: 0 auto;
+        width: 12rem;
+        height: 12rem;
+        &:hover {
+            animation-name: rotarIcono;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+        }
+    }
+    &__titulo {
+        margin: 2rem 0;
+        color: darken($color: v.$primario, $amount: 30);
+        text-transform: uppercase;
+        font-size: 2.3rem;
+    }
+}
+
+@keyframes rotarIcono {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
