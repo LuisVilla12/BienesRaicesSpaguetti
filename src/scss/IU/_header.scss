@@ -13,6 +13,7 @@
         }
     }
     &__titulo {
+        line-height: 2;
         margin-top: 8rem;
         text-align: center;
         color: v.$blanco;
@@ -61,6 +62,7 @@
         display: block;
         text-align: center;
         margin: 1rem 0;
+        font-weight: bold;
         @include m.tablet {
             display: inline-block;
             margin: unset;
@@ -69,7 +71,7 @@
         font-size: 1.9rem;
         color: v.$blanco;
         &:hover {
-            color: v.$primario;
+            color: v.$secundario;
         }
     }
 }
