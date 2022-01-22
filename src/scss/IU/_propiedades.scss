@@ -10,8 +10,13 @@
         font-weight: 300;
     }
     &__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 33rem);
+        column-gap: 4rem;
+        @include m.efectoScrollHorizontal();
         @include m.tablet {
-            @include m.grid(3, 1rem);
+            @include m.grid(2, 1rem);
+            overflow-x: hidden;
         }
     }
 }
