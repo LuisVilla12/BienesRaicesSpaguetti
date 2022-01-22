@@ -1,0 +1,89 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+.propiedades {
+    margin: 2rem 0;
+    &__titulo {
+        text-align: center;
+        margin: 2rem 0;
+        color: darken($color: v.$primario, $amount: 50);
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+    &__grid {
+        @include m.tablet {
+            @include m.grid(3, 1rem);
+        }
+    }
+}
+
+.propiedad {
+    &__maks {
+        overflow: hidden;
+    }
+    &__img {
+        transition: all .3s;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+    &__contenido {
+        background-color: v.$secundario;
+        padding: 0 2rem 3rem 2rem;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+    }
+    &__titulo {
+        margin-top: 0;
+        padding: 1.5rem 0;
+        text-align: center;
+        font-weight: bold;
+        color: v.$blanco;
+        // font-size: 3rem;
+        background-color: darken($color: v.$primario, $amount: 50);
+    }
+    &__descripcion {
+        text-align: justify;
+        margin: 0;
+        padding: 2rem 0;
+    }
+    &__precio {
+        text-align: center;
+        font-weight: bold;
+        color: darken($color: v.$primario, $amount: 60);
+        font-size: 2.4rem;
+        margin-bottom: 1rem;
+        margin-top: 0;
+        span {
+            color: darken($color: v.$primario, $amount: 50);
+        }
+    }
+    &__iconos {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        @include m.tablet {
+            gap: 3rem;
+        }
+    }
+    &__boton {
+        display: block;
+        @include m.boton(darken($color: v.$primario, $amount: 50), v.$blanco);
+    }
+}
+
+.icono {
+    display: flex;
+    align-items: center;
+    &__img {
+        width: 5rem;
+        height: 4rem;
+    }
+    &__cantidad {
+        margin-left: 1rem;
+        font-weight: bold;
+        @include m.desktop {
+            margin-left: 2rem;
+        }
+    }
+}
