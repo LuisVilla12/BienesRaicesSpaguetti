@@ -1,0 +1,36 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+.nosotros {
+    margin-top: 2rem;
+    &__titulo {
+        text-align: center;
+        color: darken($color: v.$primario, $amount: 50);
+        margin: 2rem 0;
+        text-transform: uppercase;
+        font-weight: 300;
+        font-size: 2.5rem;
+        @include m.tablet {
+            font-size: 3rem;
+        }
+    }
+    &__grid {
+        @include m.tablet {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+    }
+    &__texto {
+        h3 {
+            text-align: center;
+            color: darken($color: v.$primario, $amount: 30);
+            margin-top: 2rem;
+            @include m.tablet {
+                margin-top: 0;
+            }
+        }
+        p {
+            text-align: justify;
+        }
+    }
+}
