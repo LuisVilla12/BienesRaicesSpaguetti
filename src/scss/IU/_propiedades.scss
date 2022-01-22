@@ -16,9 +16,15 @@
     &__grid {
         display: grid;
         grid-template-columns: repeat(4, 33rem);
-        column-gap: 4rem;
+        &.extended {
+            grid-template-columns: repeat(6, 33rem);
+        }
+        gap: 4rem;
         @include m.efectoScrollHorizontal();
         @include m.tablet {
+            &.extended {
+                @include m.grid(3, 1rem);
+            }
             @include m.grid(2, 1rem);
             overflow-x: hidden;
         }
