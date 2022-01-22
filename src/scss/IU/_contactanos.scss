@@ -1,0 +1,24 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+.contactanos {
+    margin: 2rem 0;
+    height: 30rem;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .4) 0%, rgba(0, 0, 0, .4) 100%), url('../img/encuentra.webp');
+    color: v.$blanco;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    &__titulo {
+        text-align: center;
+        font-weight: bold;
+    }
+    &__descripcion {
+        text-align: center;
+    }
+    &__boton {
+        @include m.boton(darken($color: v.$primario, $amount: 50), v.$blanco);
+    }
+}
