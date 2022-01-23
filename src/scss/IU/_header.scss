@@ -54,9 +54,9 @@
 }
 
 .nav {
+    display: none;
     @include m.tablet {
-        flex-direction: row;
-        justify-content: space-between;
+        display: flex;
     }
     &__enlace {
         display: block;
@@ -74,4 +74,18 @@
             color: v.$secundario;
         }
     }
+}
+
+// Menu de Haburguesa
+.mobil_menu {
+    @include m.tablet {
+        display: none;
+    }
+    img {
+        width: 5rem;
+    }
+}
+
+.mostrar {
+    display: block;
 }
