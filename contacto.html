@@ -35,9 +35,9 @@
         <picture>
             <source srcset="build/img/destacada3.avif" type="image/avif">
             <source srcset="build/img/destacada3.webp" type="image/webp">
-            <img loading="lazy" src="build/img/destacada3.jpg" alt="formulario">
+            <img loading="lazy" src="build/img/destacada3.jpg" alt="formulario" class="contacto__img">
         </picture>
-        <h2>Llene el formulario</h2>
+        <h2 class="contacto__subtitulo">Conteste el formulario</h2>
         <form action="" class="formulario">
             <fieldset>
                 <legend>Informacion personal</legend>
@@ -62,7 +62,7 @@
                 <legend>Informacion de la propiedad</legend>
                 <div class="campo">
                     <label class="campo__label" for="opciones"> Vende o compra </label>
-                    <select name="" id="opciones">
+                    <select name="" id="opciones" class="campo__input">
                         <option value="" selected disabled>--Sin seleccionar--</option>
                         <option value="vende">Vende</option>
                         <option value="compra">Compra</option>
@@ -77,13 +77,15 @@
                 <legend>Contacto</legend>
                 <div class="campo">
                     <p>Como desea ser contactado</p>
-                    <div class="campo__radio">
-                        <label for="telefono">Telefono:</label>
-                        <input name="contacto" type="radio" value="telefono" id="telefono">
-                    </div>
-                    <div class="campo__radio">
-                        <label for="E-mail">E-mail:</label>
-                        <input name="contacto" type="radio" value="E-mail" id="E-mail">
+                    <div class="campo__radios">
+                        <div class="campo__radio">
+                            <label class="campo__label" for="telefono">Telefono:</label>
+                            <input name="contacto" type="radio" value="telefono" id="telefono">
+                        </div>
+                        <div class="campo__radio">
+                            <label class="campo__label" for="E-mail">E-mail:</label>
+                            <input name="contacto" type="radio" value="E-mail" id="E-mail">
+                        </div>
                     </div>
                     <div class="campo">
                         <label class="campo__label" for="fecha">Fecha: </label>
@@ -94,8 +96,8 @@
                         <input class="campo__input" type="time" id="hora">
                     </div>
                 </div>
-                <input type="submit" value="Enviar" class="btn-enviar">
             </fieldset>
+            <input type="submit" value="Enviar" class="btn-enviar">
         </form>
 
     </main>
