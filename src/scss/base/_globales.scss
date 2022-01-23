@@ -21,7 +21,13 @@ body {
 
 .contenedor {
     width: 95%;
-    max-width: 1200px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.contenedor-md {
+    width: 95%;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -38,4 +44,8 @@ ul {
 
 main {
     flex: 1;
+}
+
+.mt-2 {
+    margin-top: 2rem;
 }
