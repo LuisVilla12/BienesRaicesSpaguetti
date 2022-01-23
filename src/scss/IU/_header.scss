@@ -14,7 +14,6 @@
     }
     &__titulo {
         line-height: 2;
-        margin-top: 8rem;
         text-align: center;
         color: v.$blanco;
         font-weight: bold;
@@ -54,13 +53,19 @@
 }
 
 .nav {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .3s ease-in-out, opacity .5s linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     @include m.tablet {
-        display: flex;
+        flex-direction: row;
+        visibility: visible;
+        opacity: 1;
     }
     &__enlace {
         display: block;
-        text-align: center;
         margin: 1rem 0;
         font-weight: bold;
         @include m.tablet {
@@ -78,14 +83,32 @@
 
 // Menu de Haburguesa
 .mobil_menu {
+    margin-top: 2rem;
     @include m.tablet {
         display: none;
     }
     img {
-        width: 5rem;
+        width: 4rem;
+        height: 4rem;
     }
 }
 
 .mostrar {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+// Dark Mode
+.dark-mode-btn {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem 0;
+    filter: invert(100%);
+    @include m.tablet {
+        margin: 0;
+        margin-right: 1.5rem;
+    }
+    &:hover {
+        cursor: pointer;
+    }
 }

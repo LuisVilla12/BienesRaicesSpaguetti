@@ -5,6 +5,10 @@
     &__contenido {
         padding-top: 2rem;
     }
+    .nav {
+        visibility: visible;
+        opacity: 1;
+    }
     &__copy {
         color: v.$blanco;
         font-size: 2rem;
