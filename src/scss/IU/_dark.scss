@@ -2,6 +2,9 @@
 @use '../base/mixins' as m;
 .dark-mode {
     background-color: darken($color: v.$gris, $amount: 80);
+    .header {
+        background-color: darken($color: v.$terciario, $amount: 70);
+    }
     h2,
     h3 {
         color: v.$blanco;
@@ -42,5 +45,23 @@
     }
     .footer {
         background-color: darken($color: v.$terciario, $amount: 70);
+    }
+    .formulario {
+        legend {
+            color: v.$blanco;
+        }
+        fieldset {
+            border: .2rem solid v.$gris;
+        }
+        .campo {
+            &__label {
+                color: v.$gris;
+            }
+            &__input,
+            textarea {
+                background-color: darken($color: v.$terciario, $amount: 70);
+                color: v.$blanco;
+            }
+        }
     }
 }

@@ -16,11 +16,25 @@ function navegacion() {
 }
 
 function darkMode() {
+    const prefiereDark = window.matchMedia('(prefers-color-scheme: dark)');
+    // Obtiene el valor true si prefiere el dark
+    // console.log(prefiereDark.matches);
+    if (prefiereDark.matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+    prefiereDark.addEventListener('click', () => {
+        if (prefiereDark.matches) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    })
     const btnDark = document.querySelector('.dark-mode-btn');
     btnDark.addEventListener('click', dark)
 }
 
 function dark() {
-    // Añade la clase de dark-mode a todo el html
     document.body.classList.toggle('dark-mode');
 }

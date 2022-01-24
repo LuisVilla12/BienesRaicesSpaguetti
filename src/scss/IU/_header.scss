@@ -59,6 +59,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 0;
+    transition: height .3s linear;
     @include m.tablet {
         flex-direction: row;
         visibility: visible;
@@ -96,6 +98,7 @@
 .mostrar {
     visibility: visible;
     opacity: 1;
+    height: auto;
 }
 
 // Dark Mode
