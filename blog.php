@@ -1,39 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienes Raices</title>
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">  -->
-    <!-- Preload -->
-    <link rel="stylesheet" href="build/css/app.css">
-</head>
-
-<body>
-    <header class="header">
-        <div class="contenedor-md">
-            <div class="barra">
-                <a href="index.html">
-                    <img class="logo" src="build/img/logo.svg" alt="logo">
-                </a>
-                <div class="mobil_menu">
-                    <img src="build/img/barras.svg" alt="Menu Movil">
-                </div>
-                <nav class="nav">
-                    <img src="build/img/dark-mode.svg" alt="dark" class="dark-mode-btn">
-                    <a class="nav__enlace" href="nosotros.html">Nosotros</a>
-                    <a class="nav__enlace" href="anuncio.html">Anuncio</a>
-                    <a class="nav__enlace" href="blog.html">Blog</a>
-                    <a class="nav__enlace" href="contact.html">Contacto</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
+<?php 
+    // Importa las funciones
+    require 'includes/funciones.php';
+    incluirTemplate('header');
+?>
     <main class="contenedor">
         <h2 class="blogs__titulo mt-2">Nuestro blog</h2>
         <div class="blog">
@@ -108,18 +77,4 @@
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="footer__contenido">
-            <nav class="nav contenedor">
-                <a class="nav__enlace" href="nosotros.html">Nosotros</a>
-                <a class="nav__enlace" href="anuncio.html">Anuncio</a>
-                <a class="nav__enlace" href="blog.html">Blog</a>
-                <a class="nav__enlace" href="contact.html">Contacto</a>
-            </nav>
-        </div>
-        <p class="footer__copy">&copy;Todos los derechos reservados</p>
-    </footer>
-    <script src="build/javas.js"></script>
-</body>
-
-</html>
+    <?php incluirTemplate('footer');?>

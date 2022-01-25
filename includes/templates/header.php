@@ -14,10 +14,10 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="contenedor">
+    <header class="header <?php echo $imagen? 'imagen': ''?>">
+        <div class="<?php echo $imagen? 'header__contenido': ''?> contenedor">
             <div class="barra">
-                <a href="index.html">
+                <a href="index.php">
                     <img class="logo" src="build/img/logo.svg" alt="logo">
                 </a>
                 <div class="mobil_menu">
@@ -25,30 +25,13 @@
                 </div>
                 <nav class="nav">
                     <img src="build/img/dark-mode.svg" alt="dark" class="dark-mode-btn">
-                    <a class="nav__enlace" href="nosotros.html">Nosotros</a>
-                    <a class="nav__enlace" href="anuncio.html">Anuncio</a>
-                    <a class="nav__enlace" href="blog.html">Blog</a>
-                    <a class="nav__enlace" href="contact.html">Contacto</a>
+                    <a class="nav__enlace" href="nosotros.php">Nosotros</a>
+                    <a class="nav__enlace" href="anuncio.php">Anuncio</a>
+                    <a class="nav__enlace" href="blog.php">Blog</a>
+                    <a class="nav__enlace" href="contacto.php">Contacto</a>
                 </nav>
             </div>
+            <?php $imagen? '<h1 class="header__titulo"> Venta de casas y departamentos de lujo</h1>': ''?>
+            
         </div>
     </header>
-
-    <main class="contenedor">
-    </main>
-
-    <footer class="footer">
-        <div class="footer__contenido">
-            <nav class="nav contenedor">
-                <a class="nav__enlace" href="nosotros.html">Nosotros</a>
-                <a class="nav__enlace" href="anuncio.html">Anuncio</a>
-                <a class="nav__enlace" href="blog.html">Blog</a>
-                <a class="nav__enlace" href="contact.html">Contacto</a>
-            </nav>
-        </div>
-        <p class="footer__copy">&copy;Todos los derechos reservados</p>
-    </footer>
-    <script src="build/javas.js"></script>
-</body>
-
-</html>
