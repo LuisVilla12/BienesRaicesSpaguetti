@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">  -->
     <!-- Preload -->
-    <link rel="stylesheet" href="build/css/app.css">
+    <link rel="stylesheet" href="/build/css/app.css">
 </head>
 
 <body>
@@ -18,20 +18,19 @@
         <div class="<?php echo $imagen? 'header__contenido': ''?> contenedor">
             <div class="barra">
                 <a href="index.php">
-                    <img class="logo" src="build/img/logo.svg" alt="logo">
+                    <img class="logo" src="/build/img/logo.svg" alt="logo">
                 </a>
                 <div class="mobil_menu">
-                    <img src="build/img/barras.svg" alt="Menu Movil">
+                    <img src="/build/img/barras.svg" alt="Menu Movil">
                 </div>
                 <nav class="nav">
-                    <img src="build/img/dark-mode.svg" alt="dark" class="dark-mode-btn">
-                    <a class="nav__enlace" href="nosotros.php">Nosotros</a>
-                    <a class="nav__enlace" href="anuncio.php">Anuncio</a>
-                    <a class="nav__enlace" href="blog.php">Blog</a>
-                    <a class="nav__enlace" href="contacto.php">Contacto</a>
+                    <img src="/build/img/dark-mode.svg" alt="dark" class="dark-mode-btn">
+                    <a class="nav__enlace" href="/nosotros.php">Nosotros</a>
+                    <a class="nav__enlace" href="/anuncio.php">Anuncio</a>
+                    <a class="nav__enlace" href="/blog.php">Blog</a>
+                    <a class="nav__enlace" href="/contacto.php">Contacto</a>
                 </nav>
             </div>
             <?php $imagen? '<h1 class="header__titulo"> Venta de casas y departamentos de lujo</h1>': ''?>
-            
         </div>
     </header>
