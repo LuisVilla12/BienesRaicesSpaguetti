@@ -6,7 +6,11 @@ $db = conectarDB();
 // echo "<pre>";    
 // var_dump($_POST);
 // echo "</pre>";   
-// Valida que sea de un metodo POST
+
+// Crea arreglo de errores
+$errores = [];
+
+// Valida que sea el metodo POST cuando den el boton de enviar
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // echo "<pre>";
     // var_dump($_POST);
@@ -20,18 +24,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $estacionamientos = $_POST['estacionamientos'];
     $idVendedor = $_POST['vendedor'];
 
-    //consulta a la base de datos
-    $query = "INSERT INTO propiedades  (titulo,precio,descripcion, habitaciones,wc,estacionamientos,idVendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamientos','$idVendedor')";
-    // echo $query;
-    
-    // Insertarlo a la base de datos
-    $resultado=mysqli_query($db,$query);
-    if($resultado){
-        echo "Insertado correctamente";
-    }else{
-        echo "Error";
+    // Valida que no ocurran errores
+    if (!$titulo) {
+        $errores[] = 'Debe ingresar un titulo a la propiedad';
+    }
+    if ($precio < 9000) {
+        $errores[] = 'Debe ingresar un precio valido  a la propiedad';
+    }
+    if (strlen($descripcion) < 20) {
+        $errores[] = 'Debe ingresar una descripcion valida a la propiedad';
+    }
+    if (!$habitaciones) {
+        $errores[] = 'Debe ingresar un n° de habitaciones a la propiedad';
+    }
+    if (!$wc) {
+        $errores[] = 'Debe ingresar un n° de wc a la propiedad';
+    }
+    if ($habitaciones) {
+        $errores[] = 'Debe ingresar un n° de habitaciones a la propiedad';
+    }
+    if (!$estacionamientos) {
+        $errores[] = 'Debe ingresar un n° de estacionamientos a la propiedad';
+    }
+    if (!$idVendedor) {
+        $errores[] = 'Debe seleccionar un vendedor a la propiedad';
+    }
+
+    // Si el arreglo de errores esta vacio
+    if (empty($errores)) {
+
+        //consulta a la base de datos
+        $query = "INSERT INTO propiedades  (titulo,precio,descripcion, habitaciones,wc,estacionamientos,idVendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamientos','$idVendedor')";
+        // echo $query;
+        // Insertarlo a la base de datos
+        $resultado = mysqli_query($db, $query);
+        if ($resultado) {
+            echo "Insertado correctamente";
+        }
     }
 }
+
 // Importa las funciones
 require '../../includes/funciones.php';
 incluirTemplate('header');
@@ -39,13 +71,21 @@ incluirTemplate('header');
 <main class="contenedor">
     <h1 class="admin__titulo">Nueva propiedad</h1>
     <a href="/Admin" class="btn">Volver</a>
-    <!-- action se encarga de enviar los datos -->
+    
+    <!-- Itera en el arreglo de erroes -->
+    <?php foreach($errores as $error): ?>
+        <div class="alerta error">
+            <p><?php echo $error ?></p>
+        </div>
+    <?php endforeach;?>
+
+    <!-- action se encarga de enviar los datos en una pagina en especifico-->
     <form action="/Admin/propiedades/crear.php" class="formulario" method="POST">
         <fieldset>
             <legend>Informacion general</legend>
             <div class="campo">
                 <label class="campo__label" for="titulo">Titulo: </label>
-                <input class="campo__input" type="text" id="titulo" name="titulo" placeholder="Ingrese el titulo de la propiedad">
+                <input class="campo__input" type="text" id="titulo" name="titulo" placeholder="Ingrese el titulo de la propiedad" value="">
             </div>
             <div class="campo">
                 <label class="campo__label" for="precio">Precio: </label>
@@ -77,8 +117,8 @@ incluirTemplate('header');
         </fieldset>
         <fieldset>
             <legend>Información del vendedor</legend>
-            <select  id="" name="vendedor" class="campo__input">
-                <option value="0">--Sin seleccionar --</option>
+            <select id="" name="vendedor" class="campo__input">
+                <option value="">--Sin seleccionar --</option>
                 <option value="1">Luis Villa</option>
                 <option value="2">Moises</option>
             </select>

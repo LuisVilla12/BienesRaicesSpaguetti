@@ -1,0 +1,12 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+.alerta {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    &.error {
+        background-color: red;
+    }
+}
