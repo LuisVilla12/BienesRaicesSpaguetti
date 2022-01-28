@@ -24,14 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // echo "<pre>";
     // var_dump($_POST);
     // echo "</pre>";
-    $titulo = $_POST['titulo'];
-    $precio = $_POST['precio'];
-    $imagen = $_POST['imagen'];
-    $descripcion = $_POST['descripcion'];
-    $habitaciones = $_POST['habitaciones'];
-    $wc = $_POST['wc'];
-    $estacionamientos = $_POST['estacionamientos'];
-    $idVendedor = $_POST['vendedor'];
+    //Sanitiza los resultados
+    $titulo = mysqli_real_escape_string($db,$_POST['titulo']); 
+    $precio = mysqli_real_escape_string($db,$_POST['precio']); 
+    $imagen = mysqli_real_escape_string($db,$_POST['imagen']); 
+    $descripcion = mysqli_real_escape_string($db,$_POST['descripcion']); 
+    $habitaciones = mysqli_real_escape_string($db,$_POST['habitaciones']); 
+    $wc = mysqli_real_escape_string($db,$_POST['wc']); 
+    $estacionamientos = mysqli_real_escape_string($db,$_POST['estacionamientos']); 
+    $idVendedor = mysqli_real_escape_string($db,$_POST['vendedor']); 
     $creado= date('Y/m/d');
 
     // Valida que no ocurran errores
