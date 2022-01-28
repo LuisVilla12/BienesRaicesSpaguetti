@@ -2,10 +2,9 @@
 // Importar la conexion
 require '../../includes/config/database.php';
 $db = conectarDB();
-// Muestra los datos de la super variable POST
-// echo "<pre>";    
-// var_dump($_POST);
-// echo "</pre>";   
+// Consultar todos los vendedores
+$queryVendedores = "SELECT * FROM vendedores";
+$resultadoVendedores = mysqli_query($db, $queryVendedores);
 
 // Crea arreglo de errores
 $errores = [];
@@ -33,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $wc = $_POST['wc'];
     $estacionamientos = $_POST['estacionamientos'];
     $idVendedor = $_POST['vendedor'];
+    $creado= date('Y/m/d');
 
     // Valida que no ocurran errores
     if (!$titulo) {
@@ -50,9 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$wc) {
         $errores[] = 'Debe ingresar un n° de wc a la propiedad';
     }
-    if (!$habitaciones) {
-        $errores[] = 'Debe ingresar un n° de habitaciones a la propiedad';
-    }
     if (!$estacionamientos) {
         $errores[] = 'Debe ingresar un n° de estacionamientos a la propiedad';
     }
@@ -64,12 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($errores)) {
 
         //consulta a la base de datos
-        $query = "INSERT INTO propiedades  (titulo,precio,descripcion, habitaciones,wc,estacionamientos,idVendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamientos','$idVendedor')";
+        $query = "INSERT INTO propiedades  (titulo,precio,descripcion, habitaciones,wc,estacionamientos,creado,idVendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamientos','$creado','$idVendedor')";
         // echo $query;
         // Insertarlo a la base de datos
         $resultado = mysqli_query($db, $query);
         if ($resultado) {
-            echo "Insertado correctamente";
+            // Redireccionar el usuario
+            header('Location:/admin');
         }
     }
 }
@@ -95,12 +93,11 @@ incluirTemplate('header');
             <legend>Informacion general</legend>
             <div class="campo">
                 <label class="campo__label" for="titulo">Titulo: </label>
-                <input class="campo__input" type="text" id="titulo" name="titulo" placeholder="Ingrese el titulo de la propiedad" 
-                value="<?php echo $titulo;?>">
+                <input class="campo__input" type="text" id="titulo" name="titulo" placeholder="Ingrese el titulo de la propiedad" value="<?php echo $titulo; ?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="precio">Precio: </label>
-                <input class="campo__input" type="number" id="precio" name="precio" placeholder="Ingrese el precio de la propiedad" value="<?php echo $precio;?>">
+                <input class="campo__input" type="number" id="precio" name="precio" placeholder="Ingrese el precio de la propiedad" value="<?php echo $precio; ?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="imagen">Imagen: </label>
@@ -115,24 +112,25 @@ incluirTemplate('header');
             <legend>Información de la propiedad</legend>
             <div class="campo">
                 <label class="campo__label" for="habitaciones">Habitaciones: </label>
-                <input class="campo__input" type="number" id="habitaciones" placeholder="Ingrese el n° de habitaciones" min="1" name="habitaciones" value="<?php echo $habitaciones;?>">
+                <input class="campo__input" type="number" id="habitaciones" placeholder="Ingrese el n° de habitaciones" min="1" name="habitaciones" value="<?php echo $habitaciones; ?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="wc">wc: </label>
-                <input class="campo__input" type="number" id="wc" placeholder="Ingrese el n° de baños" min="1" name="wc"
-                value="<?php echo $wc;?>">
+                <input class="campo__input" type="number" id="wc" placeholder="Ingrese el n° de baños" min="1" name="wc" value="<?php echo $wc; ?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="estacionamientos">Estacionamientos: </label>
-                <input class="campo__input" type="number" id="estacionamientos" placeholder="Ingrese el n° de estacionamientos" min="1" name="estacionamientos" value="<?php echo $estacionamientos;?>">
+                <input class="campo__input" type="number" id="estacionamientos" placeholder="Ingrese el n° de estacionamientos" min="1" name="estacionamientos" value="<?php echo $estacionamientos; ?>">
             </div>
         </fieldset>
         <fieldset>
             <legend>Información del vendedor</legend>
             <select id="" name="vendedor" class="campo__input">
                 <option value="">--Sin seleccionar --</option>
-                <option value="1">Luis Villa</option>
-                <option value="2">Moises</option>
+                <?php while ($row = mysqli_fetch_assoc($resultadoVendedores)) : ?>
+                    <option <?php echo $idVendedor === $row['id'] ? 'selected' : '' ?> value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] . " " . $row['apellido']; ?></option>
+
+                <?php endwhile; ?>
             </select>
         </fieldset>
         <input type="submit" value="Registrar" class="btn-enviar">

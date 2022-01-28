@@ -6,8 +6,10 @@
     border-radius: 1rem;
     margin-bottom: 1rem;
     font-weight: bold;
-    margin: 0;
     margin-bottom: 1rem;
+    p {
+        margin: 0;
+    }
     &.error {
         background-color: rgb(177, 10, 10);
     }
