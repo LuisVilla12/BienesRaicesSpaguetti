@@ -10,6 +10,16 @@ $db = conectarDB();
 // Crea arreglo de errores
 $errores = [];
 
+//Inicio de variables
+$titulo = '';
+$precio = '';
+$imagen = '';
+$descripcion = '';
+$habitaciones = '';
+$wc = '';
+$estacionamientos = '';
+$idVendedor = '';
+
 // Valida que sea el metodo POST cuando den el boton de enviar
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // echo "<pre>";
@@ -40,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$wc) {
         $errores[] = 'Debe ingresar un n° de wc a la propiedad';
     }
-    if ($habitaciones) {
+    if (!$habitaciones) {
         $errores[] = 'Debe ingresar un n° de habitaciones a la propiedad';
     }
     if (!$estacionamientos) {
@@ -71,13 +81,13 @@ incluirTemplate('header');
 <main class="contenedor">
     <h1 class="admin__titulo">Nueva propiedad</h1>
     <a href="/Admin" class="btn">Volver</a>
-    
+
     <!-- Itera en el arreglo de erroes -->
-    <?php foreach($errores as $error): ?>
+    <?php foreach ($errores as $error) : ?>
         <div class="alerta error">
             <p><?php echo $error ?></p>
         </div>
-    <?php endforeach;?>
+    <?php endforeach; ?>
 
     <!-- action se encarga de enviar los datos en una pagina en especifico-->
     <form action="/Admin/propiedades/crear.php" class="formulario" method="POST">
@@ -85,11 +95,12 @@ incluirTemplate('header');
             <legend>Informacion general</legend>
             <div class="campo">
                 <label class="campo__label" for="titulo">Titulo: </label>
-                <input class="campo__input" type="text" id="titulo" name="titulo" placeholder="Ingrese el titulo de la propiedad" value="">
+                <input class="campo__input" type="text" id="titulo" name="titulo" placeholder="Ingrese el titulo de la propiedad" 
+                value="<?php echo $titulo;?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="precio">Precio: </label>
-                <input class="campo__input" type="number" id="precio" name="precio" placeholder="Ingrese el precio de la propiedad">
+                <input class="campo__input" type="number" id="precio" name="precio" placeholder="Ingrese el precio de la propiedad" value="<?php echo $precio;?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="imagen">Imagen: </label>
@@ -97,22 +108,23 @@ incluirTemplate('header');
             </div>
             <div class="campo">
                 <label class="campo__label" for="descripcion">Descripcion: </label>
-                <textarea name="descripcion" id="descripcion"></textarea>
+                <textarea name="descripcion" id="descripcion"><?php echo $descripcion ?></textarea>
             </div>
         </fieldset>
         <fieldset>
             <legend>Información de la propiedad</legend>
             <div class="campo">
                 <label class="campo__label" for="habitaciones">Habitaciones: </label>
-                <input class="campo__input" type="number" id="habitaciones" placeholder="Ingrese el n° de habitaciones" min="1" name="habitaciones">
+                <input class="campo__input" type="number" id="habitaciones" placeholder="Ingrese el n° de habitaciones" min="1" name="habitaciones" value="<?php echo $habitaciones;?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="wc">wc: </label>
-                <input class="campo__input" type="number" id="wc" placeholder="Ingrese el n° de baños" min="1" name="wc">
+                <input class="campo__input" type="number" id="wc" placeholder="Ingrese el n° de baños" min="1" name="wc"
+                value="<?php echo $wc;?>">
             </div>
             <div class="campo">
                 <label class="campo__label" for="estacionamientos">Estacionamientos: </label>
-                <input class="campo__input" type="number" id="estacionamientos" placeholder="Ingrese el n° de estacionamientos" min="1" name="estacionamientos">
+                <input class="campo__input" type="number" id="estacionamientos" placeholder="Ingrese el n° de estacionamientos" min="1" name="estacionamientos" value="<?php echo $estacionamientos;?>">
             </div>
         </fieldset>
         <fieldset>

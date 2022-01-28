@@ -1,12 +1,14 @@
 @use '../base/variables' as v;
 @use '../base/mixins' as m;
 .alerta {
-    padding: 1rem;
+    padding: .8rem;
     text-align: center;
     border-radius: 1rem;
     margin-bottom: 1rem;
     font-weight: bold;
+    margin: 0;
+    margin-bottom: 1rem;
     &.error {
-        background-color: red;
+        background-color: rgb(177, 10, 10);
     }
 }
