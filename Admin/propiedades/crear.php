@@ -25,15 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // var_dump($_POST);
     // echo "</pre>";
     //Sanitiza los resultados
-    $titulo = mysqli_real_escape_string($db,$_POST['titulo']); 
-    $precio = mysqli_real_escape_string($db,$_POST['precio']); 
-    $imagen = mysqli_real_escape_string($db,$_POST['imagen']); 
-    $descripcion = mysqli_real_escape_string($db,$_POST['descripcion']); 
-    $habitaciones = mysqli_real_escape_string($db,$_POST['habitaciones']); 
-    $wc = mysqli_real_escape_string($db,$_POST['wc']); 
-    $estacionamientos = mysqli_real_escape_string($db,$_POST['estacionamientos']); 
-    $idVendedor = mysqli_real_escape_string($db,$_POST['vendedor']); 
-    $creado= date('Y/m/d');
+    $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
+    $precio = mysqli_real_escape_string($db, $_POST['precio']);
+    // $imagen = mysqli_real_escape_string($db,$_POST['imagen']); 
+    $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
+    $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
+    $wc = mysqli_real_escape_string($db, $_POST['wc']);
+    $estacionamientos = mysqli_real_escape_string($db, $_POST['estacionamientos']);
+    $idVendedor = mysqli_real_escape_string($db, $_POST['vendedor']);
+    $creado = date('Y/m/d');
+
+    // Obtiene el nombre de la imagen que se subio
+    $imagen = $_FILES['imagen'];
 
     // Valida que no ocurran errores
     if (!$titulo) {
@@ -57,10 +60,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$idVendedor) {
         $errores[] = 'Debe seleccionar un vendedor a la propiedad';
     }
-
+    if (!$imagen['name']) {
+        $errores[] = 'Debes subir una imagen de la propiedad';
+    }
+    // Valida el tamaño de las imagenes (1000KB Maximo)
+    $medida = 1000 * 100;
+    if ($imagen['size'] > $medida || $imagen['error']) {
+        $errores[] = 'Excedes el tamaño de la imagen';
+    }
     // Si el arreglo de errores esta vacio
     if (empty($errores)) {
-
+        //Ruta de la carpeta
+        $carpetaImagenes = '../../imagenes';
+        // Verifica si no exite esa ruta 
+        if (!is_dir($carpetaImagenes)) {
+            // Crea la carpeta con esa ruta
+            mkdir($carpetaImagenes);
+        }
+        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . "/archivo.jpg");
+        exit;
         //consulta a la base de datos
         $query = "INSERT INTO propiedades  (titulo,precio,descripcion, habitaciones,wc,estacionamientos,creado,idVendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamientos','$creado','$idVendedor')";
         // echo $query;
@@ -89,7 +107,8 @@ incluirTemplate('header');
     <?php endforeach; ?>
 
     <!-- action se encarga de enviar los datos en una pagina en especifico-->
-    <form action="/Admin/propiedades/crear.php" class="formulario" method="POST">
+    <!-- enctype es para la subida de archivo -->
+    <form action="/Admin/propiedades/crear.php" class="formulario" method="POST" enctype="multipart/form-data">
         <fieldset>
             <legend>Informacion general</legend>
             <div class="campo">
