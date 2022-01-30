@@ -71,16 +71,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Si el arreglo de errores esta vacio
     if (empty($errores)) {
         //Ruta de la carpeta
-        $carpetaImagenes = '../../imagenes';
+        $carpetaImagenes = '../../imagenes/';
         // Verifica si no exite esa ruta 
         if (!is_dir($carpetaImagenes)) {
             // Crea la carpeta con esa ruta
             mkdir($carpetaImagenes);
         }
-        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . "/archivo.jpg");
-        exit;
+        //Generar nombre unico
+        // md5=hashea un texto y lo convierte
+        // uniqid=Genera un id unico
+        $nombreImagen=md5(uniqid(rand(),true));
+
+        // Mueve la imagen
+        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . $nombreImagen ."jpg");
+        
         //consulta a la base de datos
-        $query = "INSERT INTO propiedades  (titulo,precio,descripcion, habitaciones,wc,estacionamientos,creado,idVendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamientos','$creado','$idVendedor')";
+        $query = "INSERT INTO propiedades  (titulo,precio,imagen,descripcion, habitaciones,wc,estacionamientos,creado,idVendedor) VALUES ('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamientos','$creado','$idVendedor')";
         // echo $query;
         // Insertarlo a la base de datos
         $resultado = mysqli_query($db, $query);
