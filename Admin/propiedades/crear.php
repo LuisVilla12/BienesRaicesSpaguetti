@@ -64,10 +64,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errores[] = 'Debes subir una imagen de la propiedad';
     }
     // Valida el tamaño de las imagenes (1000KB Maximo)
-    $medida = 1000 * 100;
-    if ($imagen['size'] > $medida || $imagen['error']) {
-        $errores[] = 'Excedes el tamaño de la imagen';
-    }
+    // $medida = 1000 * 100;
+    // if ($imagen['size'] > $medida || $imagen['error']) {
+    //     $errores[] = 'Excedes el tamaño de la imagen';
+    // }
     // Si el arreglo de errores esta vacio
     if (empty($errores)) {
         //Ruta de la carpeta
@@ -80,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //Generar nombre unico
         // md5=hashea un texto y lo convierte
         // uniqid=Genera un id unico
-        $nombreImagen=md5(uniqid(rand(),true));
+        $nombreImagen=md5(uniqid(rand(),true)) .".jpg";
 
         // Mueve la imagen
-        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . $nombreImagen .".jpg");
+        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . $nombreImagen);
         
         //consulta a la base de datos
         $query = "INSERT INTO propiedades  (titulo,precio,imagen,descripcion, habitaciones,wc,estacionamientos,creado,idVendedor) VALUES ('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamientos','$creado','$idVendedor')";

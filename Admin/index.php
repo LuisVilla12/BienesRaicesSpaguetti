@@ -1,4 +1,11 @@
 <?php
+// Importar conexion
+require '../includes/config/database.php';
+$db = conectarDB();
+// Query
+$queryPropiedades="SELECT * FROM propiedades";
+//Consultar la base de datos
+$resultadoPropiedades=mysqli_query($db,$queryPropiedades);
 // Sino existe se asigna el valor null
 $registro = $_GET['registro'] ?? null;
 // Importa las funciones
@@ -24,18 +31,25 @@ incluirTemplate('header');
             </tr>
         </thead>
         <tbody>
+            <?php while ($propiedad=mysqli_fetch_assoc($resultadoPropiedades)): ?>
             <tr>
-                <td>1</td>
-                <td>Nombre aaaaaaaaaaaaaaaaaa</td>
-                <td></td>
-                <td>90000</td>
+                <td><?php echo $propiedad['id'] ?></td>
+                <td><?php echo $propiedad['titulo'] ?></td>
+                <td>
+                    <img src="/imagenes/<?php echo $propiedad['imagen'] ?>" alt="l">
+                </td>
+                <td>$<?php echo $propiedad['precio'] ?></td>
                 <td>
                     <a href="" class="btn amarillo" >Actualizar</a>
                     <a href="" class="btn rojo" >Eliminar</a>
                 </td>
             </tr>
+            <?php endwhile; ?> 
         </tbody>
     </table>
 </main>
 
-<?php incluirTemplate('footer'); ?>
+<?php 
+mysqli_close($db);
+incluirTemplate('footer'); 
+?>
