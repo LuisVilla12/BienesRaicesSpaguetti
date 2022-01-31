@@ -9,6 +9,12 @@
     @include m.tablet {
         display: inline-block;
     }
+    &.amarillo {
+        background-color: rgb(204, 173, 36);
+    }
+    &.rojo {
+        background-color: rgb(221, 6, 6);
+    }
 }
 
 .admin__titulo {
