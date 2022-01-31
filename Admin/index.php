@@ -19,6 +19,11 @@ incluirTemplate('header');
             <p>Propiedad registrada correctamento</p>
         </div>
     <?php endif; ?>
+    <?php if (intval($registro) === 2) : ?>
+        <div class="alerta exito">
+            <p>Propiedad actualizada correctamento</p>
+        </div>
+    <?php endif; ?>
     <a href="/Admin/propiedades/crear.php" class="btn">Añadir propiedad</a>
     <table class="lista">
         <thead>
@@ -40,7 +45,7 @@ incluirTemplate('header');
                 </td>
                 <td>$<?php echo $propiedad['precio'] ?></td>
                 <td>
-                    <a href="" class="btn amarillo" >Actualizar</a>
+                    <a href="/Admin/propiedades/actualizar.php?id=<?php echo $propiedad['id'];?>" class="btn amarillo" >Actualizar</a>
                     <a href="" class="btn rojo" >Eliminar</a>
                 </td>
             </tr>
