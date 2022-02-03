@@ -9,16 +9,16 @@ $resultadoVendedores = mysqli_query($db, $queryVendedores);
 // Obtener el valor del id del metodo GET
 $id = $_GET['id'] ?? null;
 // Validar que sea un entero
-$id=filter_var($id,FILTER_VALIDATE_INT);
-if(!$id){
+$id = filter_var($id, FILTER_VALIDATE_INT);
+if (!$id) {
     header('Location:/admin');
 }
 //consulta
-$queryPropiedad= "SELECT * FROM propiedades WHERE id=${id}";
+$queryPropiedad = "SELECT * FROM propiedades WHERE id=${id}";
 //resultado
-$resultadoPropiedad=mysqli_query($db,$queryPropiedad);
+$resultadoPropiedad = mysqli_query($db, $queryPropiedad);
 //Hacer un arreglo
-$propiedad=mysqli_fetch_assoc($resultadoPropiedad);
+$propiedad = mysqli_fetch_assoc($resultadoPropiedad);
 
 // Crea arreglo de errores
 $errores = [];
@@ -32,6 +32,7 @@ $habitaciones = $propiedad['habitaciones'];
 $wc = $propiedad['wc'];
 $estacionamientos = $propiedad['estacionamientos'];
 $idVendedor = $propiedad['idVendedor'];
+
 
 // Valida que sea el metodo POST cuando den el boton de enviar
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -74,14 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$idVendedor) {
         $errores[] = 'Debe seleccionar un vendedor a la propiedad';
     }
-    if (!$imagen['name']) {
-        $errores[] = 'Debes subir una imagen de la propiedad';
-    }
-    // Valida el tamaño de las imagenes (1000KB Maximo)
-    // $medida = 1000 * 100;
-    // if ($imagen['size'] > $medida || $imagen['error']) {
-    //     $errores[] = 'Excedes el tamaño de la imagen';
-    // }
+    
     // Si el arreglo de errores esta vacio
     if (empty($errores)) {
         //Ruta de la carpeta
@@ -91,17 +85,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Crea la carpeta con esa ruta
             mkdir($carpetaImagenes);
         }
-        //Generar nombre unico
-        // md5=hashea un texto y lo convierte
-        // uniqid=Genera un id unico
-        $nombreImagen=md5(uniqid(rand(),true)) .".jpg";
+        $nombreImagen='';
+        // si hay una nueva imagen
+        if ($imagen['name']) {
+            // Eliminar imagen anterior
+            unlink($carpetaImagenes . $imagenPropiedad);
 
-        // Mueve la imagen
-        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . $nombreImagen);
-        
+            //Generar nombre unico
+            // md5=hashea un texto y lo convierte
+            // uniqid=Genera un id unico
+            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+            // Mueve la imagen
+            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+        }
+        else{
+            $nombreImagen=$imagenPropiedad;
+        }
         //consulta a la base de datos
-        $query="UPDATE propiedades set titulo='$titulo',precio=$precio,imagen='$nombreImagen',descripcion='$descripcion',habitaciones=$habitaciones,wc=$wc,estacionamientos=$estacionamientos,idVendedor='$idVendedor' WHERE id=${id} ";
-        
+        $query = "UPDATE propiedades set titulo='$titulo',precio=$precio,imagen='$nombreImagen',descripcion='$descripcion',habitaciones=$habitaciones,wc=$wc,estacionamientos=$estacionamientos,idVendedor='$idVendedor' WHERE id=${id} ";
+
         // Insertarlo a la base de datos
         $resultado = mysqli_query($db, $query);
         if ($resultado) {
@@ -142,7 +145,7 @@ incluirTemplate('header');
             <div class="campo">
                 <label class="campo__label" for="imagen">Imagen: </label>
                 <input class="campo__input" type="file" id="imagen" name="imagen" accept="image/jpeg,image/png">
-                <img src="/imagenes/<?php echo $imagenPropiedad?>" alt="a">
+                <img src="/imagenes/<?php echo $imagenPropiedad ?>" alt="a">
             </div>
             <div class="campo">
                 <label class="campo__label" for="descripcion">Descripcion: </label>

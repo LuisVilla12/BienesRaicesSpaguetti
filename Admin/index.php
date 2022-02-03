@@ -17,7 +17,7 @@ incluirTemplate('header');
     <?php if (intval($registro) === 1) : ?>
         <div class="alerta exito">
             <p>Propiedad registrada correctamento</p>
-        </div>
+        </div>    
     <?php endif; ?>
     <?php if (intval($registro) === 2) : ?>
         <div class="alerta exito">
