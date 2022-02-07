@@ -80,11 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //Generar nombre unico
         // md5=hashea un texto y lo convierte
         // uniqid=Genera un id unico
-        $nombreImagen=md5(uniqid(rand(),true)) .".jpg";
+        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
         // Mueve la imagen
-        move_uploaded_file($imagen['tmp_name'],$carpetaImagenes . $nombreImagen);
-        
+        move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+
         //consulta a la base de datos
         $query = "INSERT INTO propiedades  (titulo,precio,imagen,descripcion, habitaciones,wc,estacionamientos,creado,idVendedor) VALUES ('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamientos','$creado','$idVendedor')";
         // echo $query;
@@ -103,8 +103,6 @@ incluirTemplate('header');
 ?>
 <main class="contenedor">
     <h1 class="admin__titulo">Nueva propiedad</h1>
-    <a href="/Admin" class="btn">Volver</a>
-
     <!-- Itera en el arreglo de erroes -->
     <?php foreach ($errores as $error) : ?>
         <div class="alerta error">
@@ -159,7 +157,10 @@ incluirTemplate('header');
                 <?php endwhile; ?>
             </select>
         </fieldset>
-        <input type="submit" value="Registrar" class="btn-enviar">
+        <div class="justify">
+            <a href="/Admin" class="btn">Volver</a>
+            <input type="submit" value="Registrar" class="btn-enviar">
+        </div>
     </form>
 </main>
 

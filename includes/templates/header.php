@@ -17,7 +17,7 @@
     <header class="header <?php echo $imagen? 'imagen': ''?>">
         <div class="<?php echo $imagen? 'header__contenido': ''?> contenedor">
             <div class="barra">
-                <a href="index.php">
+                <a href="/">
                     <img class="logo" src="/build/img/logo.svg" alt="logo">
                 </a>
                 <div class="mobil_menu">

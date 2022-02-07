@@ -14,12 +14,21 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $id=$_POST['id']; 
     $id=filter_var($id,FILTER_VALIDATE_INT);
     if($id){
-        // Eliminar imagen con ese ID
+        // Seleccionar el nombre de la imagen
         $queryImagen = "SELECT imagen FROM propiedades WHERE id=${id}";
+        //hace la consulta
         $resultadoImagen=mysqli_query($db,$queryImagen);
+        //Lo vuelve un objeto
+        $propiedad=mysqli_fetch_assoc($resultadoImagen);
+
+        // Eliminarlo de la carptea de imagenes
+        $carpetaImagenes = '../imagenes/';
+        unlink($carpetaImagenes . $propiedad['imagen']);
+
         // Eliminar el registro con ese ID
         $queryDelete="DELETE FROM propiedades WHERE id=${id}";
         $resultadoDelete=mysqli_query($db,$queryDelete);
+        
         if($resultadoDelete){
             header('Location:/admin?registro=3');
         }
@@ -70,7 +79,7 @@ incluirTemplate('header');
                         <a href="/Admin/propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="btn amarillo">Actualizar</a>
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $propiedad['id']; ?>">
-                            <input type="submit" class="btn rojo" value="Eliminar">
+                            <input type="submit" class="btn rojo enviar" value="Eliminar">
                         </form>
                     </td>
                 </tr>
