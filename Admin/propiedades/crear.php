@@ -2,6 +2,11 @@
 // Importar la conexion
 require '../../includes/config/database.php';
 $db = conectarDB();
+require '../../includes/funciones.php';
+$inicioSesion=validarInicioSesion();
+if(!$inicioSesion){
+    header('Location:/');
+}
 // Consultar todos los vendedores
 $queryVendedores = "SELECT * FROM vendedores";
 $resultadoVendedores = mysqli_query($db, $queryVendedores);
@@ -96,9 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
-// Importa las funciones
-require '../../includes/funciones.php';
 incluirTemplate('header');
 ?>
 <main class="contenedor">

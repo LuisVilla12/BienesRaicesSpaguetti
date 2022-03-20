@@ -1,3 +1,13 @@
+<?php
+// Validar si la sessione esta iniciada
+if (!isset($_SESSION)) {
+    session_start();
+}
+$autenticar=$_SESSION['login']??false;
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +24,8 @@
 </head>
 
 <body>
-    <header class="header <?php echo $imagen? 'imagen': ''?>">
-        <div class="<?php echo $imagen? 'header__contenido': ''?> contenedor">
+    <header class="header <?php echo $imagen ? 'imagen' : '' ?>">
+        <div class="<?php echo $imagen ? 'header__contenido' : '' ?> contenedor">
             <div class="barra">
                 <a href="/">
                     <img class="logo" src="/build/img/logo.svg" alt="logo">
@@ -29,8 +39,14 @@
                     <a class="nav__enlace" href="/anuncio.php">Anuncio</a>
                     <a class="nav__enlace" href="/blog.php">Blog</a>
                     <a class="nav__enlace" href="/contacto.php">Contacto</a>
+                    <?php if($autenticar) :?>
+                    <a class="nav__enlace" href="/cerrar-sesion.php">Cerrar sesión</a>
+                    <?php endif?>
+                    <?php if(!$autenticar) :?>
+                    <a class="nav__enlace" href="/login.php">Iniciar sesión</a>
+                    <?php endif?>
                 </nav>
-            </div>
-            <?php $imagen? '<h1 class="header__titulo"> Venta de casas y departamentos de lujo</h1>': ''?>
+            </div>  
+            <?php $imagen ? '<h1 class="header__titulo"> Venta de casas y departamentos de lujo</h1>' : '' ?>
         </div>
     </header>

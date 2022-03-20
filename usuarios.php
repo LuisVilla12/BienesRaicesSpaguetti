@@ -7,7 +7,7 @@ $correo="admin@admin.com";
 $contraseña="admin";
 $contraseñaHash=password_hash($contraseña,PASSWORD_BCRYPT);
 // Query
-$query="INSERT INTO usuarios (correo,password) VALUES ('${correo}','${contraseñaHash}')";
+$query="INSERT INTO user (correo,contraseña) VALUES ('${correo}','${contraseñaHash}')";
 
 echo '<pre>';
 var_dump($query);

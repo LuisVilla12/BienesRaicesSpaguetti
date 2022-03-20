@@ -1,5 +1,16 @@
 @use '../base/variables' as v;
 @use '../base/mixins' as m;
+.titulo__form {
+    text-align: center;
+    color: v.$blanco;
+    margin: 2rem 0;
+}
+
+.w-50 {
+    max-width: 70%;
+    margin: 0 auto;
+}
+
 .contacto {
     &__titulo {
         text-align: center;

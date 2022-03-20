@@ -29,7 +29,7 @@ $resultado = mysqli_query($db, $query);
                     </div>
                     <div class="icono">
                         <img class="icono__img" src="build/img/icono_estacionamiento.svg" alt="">
-                        <p class="icono__cantidad"><?php echo $propiedad['estacionamientos'] ?></p>
+                        <p class="icono__cantidad"><?php echo $propiedad['estacionamiento'] ?></p>
                     </div>
                     <div class="icono">
                         <img class="icono__img" src="build/img/icono_dormitorio.svg" alt="">

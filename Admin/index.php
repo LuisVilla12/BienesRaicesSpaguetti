@@ -1,41 +1,46 @@
 <?php
 // Importar conexion
 require '../includes/config/database.php';
-$db = conectarDB();
+$db = conectarDB(); 
+// Importa las funciones
+require '../includes/funciones.php';
+$inicioSesion=validarInicioSesion();
+if(!$inicioSesion){
+    header('Location:/');
+}
 // Query
 $queryPropiedades = "SELECT * FROM propiedades";
 //Consultar la base de datos
 $resultadoPropiedades = mysqli_query($db, $queryPropiedades);
+
 // Sino existe se asigna el valor null
 $registro = $_GET['registro'] ?? null;
 
 // Obtiene el valor del metodo post del input hidden
-if($_SERVER['REQUEST_METHOD']==='POST'){
-    $id=$_POST['id']; 
-    $id=filter_var($id,FILTER_VALIDATE_INT);
-    if($id){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+    if ($id) {
         // Seleccionar el nombre de la imagen
         $queryImagen = "SELECT imagen FROM propiedades WHERE id=${id}";
         //hace la consulta
-        $resultadoImagen=mysqli_query($db,$queryImagen);
+        $resultadoImagen = mysqli_query($db, $queryImagen);
         //Lo vuelve un objeto
-        $propiedad=mysqli_fetch_assoc($resultadoImagen);
+        $propiedad = mysqli_fetch_assoc($resultadoImagen);
 
         // Eliminarlo de la carptea de imagenes
         $carpetaImagenes = '../imagenes/';
         unlink($carpetaImagenes . $propiedad['imagen']);
 
         // Eliminar el registro con ese ID
-        $queryDelete="DELETE FROM propiedades WHERE id=${id}";
-        $resultadoDelete=mysqli_query($db,$queryDelete);
-        
-        if($resultadoDelete){
+        $queryDelete = "DELETE FROM propiedades WHERE id=${id}";
+        $resultadoDelete = mysqli_query($db, $queryDelete);
+
+        if ($resultadoDelete) {
             header('Location:/admin?registro=3');
         }
     }
 }
-// Importa las funciones
-require '../includes/funciones.php';
 incluirTemplate('header');
 ?>
 <main class="contenedor">
@@ -53,6 +58,11 @@ incluirTemplate('header');
     <?php if (intval($registro) === 3) : ?>
         <div class="alerta exito">
             <p>Propiedad eliminada correctamento</p>
+        </div>
+    <?php endif; ?>
+    <?php if (intval($registro) === 4) : ?>
+        <div class="alerta exito">
+            <p>Bienvenidooo</p>
         </div>
     <?php endif; ?>
     <a href="/Admin/propiedades/crear.php" class="btn">Añadir propiedad</a>
